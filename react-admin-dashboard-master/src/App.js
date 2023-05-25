@@ -36,7 +36,7 @@ const ProtectedRoute = ({ children }) => {
 function App(user) {
   const [theme, colorMode] = useMode();
   const [isSidebar, setIsSidebar] = useState(true);
-
+/*
   const ProtectedRoute = ({ children }) => {
     const { user } = useContext(AuthContext);
 
@@ -46,6 +46,7 @@ function App(user) {
 
     return children;
   };
+*/
 
   return (
     <ColorModeContext.Provider value={colorMode}>
