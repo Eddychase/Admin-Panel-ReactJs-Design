@@ -1,11 +1,58 @@
+import { useEffect, useState } from "react";
+import axios from "axios";
 import { ResponsivePie } from "@nivo/pie";
 import { tokens } from "../theme";
 import { useTheme } from "@mui/material";
-import { mockPieData as data } from "../data/mockData";
 
 const PieChart = () => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
+
+  const [data, setData] = useState([]);
+
+  useEffect(() => {
+    const fetchTransactions = async () => {
+      try {
+        const response = await axios.get("https://mobried-admin-panel.onrender.com/api/transactions");
+        const formattedTransactions = response.data.map((transaction) => ({
+          id: transaction._id,
+          ...transaction,
+        }));
+
+        // create a dictionary to keep track of the count of each product
+        const productCounts = {};
+
+        formattedTransactions.forEach((transaction) => {
+          const { productName } = transaction;
+          if (productCounts[productName]) {
+            productCounts[productName] += 1;
+          } else {
+            productCounts[productName] = 1;
+          }
+        });
+
+        // create an array of objects that includes the product name and count
+        const productsData = Object.entries(productCounts).map(([productName, count]) => ({
+          id: productName,
+          label: productName,
+          value: count,
+        }));
+
+        // sort the products by the count of transactions
+        const sortedProductsData = productsData.sort((a, b) => b.value - a.value);
+
+        // take only the top 5 products with the most transactions
+        const topProductsData = sortedProductsData.slice(0, 5);
+
+        setData(topProductsData);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchTransactions();
+  }, []);
+
   return (
     <ResponsivePie
       data={data}

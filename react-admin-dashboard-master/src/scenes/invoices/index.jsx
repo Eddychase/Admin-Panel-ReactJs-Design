@@ -49,7 +49,7 @@ const Invoices = () => {
     },
     {
       field: "delete",
-      headerName: "Delete",
+      headerName: "",
       flex: 1,
       renderCell: (params) => (
         <Button
@@ -67,7 +67,7 @@ const Invoices = () => {
   useEffect(() => {
     const fetchTransactions = async () => {
       try {
-        const response = await axios.get("http://localhost:8800/api/transactions");
+        const response = await axios.get("https://mobried-admin-panel.onrender.com/api/transactions");
         const formattedTransactions = response.data.map((transaction) => ({
           id: transaction._id,
           ...transaction,
@@ -82,7 +82,7 @@ const Invoices = () => {
 
   const handleDelete = async (id) => {
     try {
-      await axios.delete(`http://localhost:8800/api/transactions/${id}`);
+      await axios.delete(`https://mobried-admin-panel.onrender.com/api/transactions/${id}`);
       setTransactions(transactions.filter((transaction) => transaction.id !== id));
     } catch (error) {
       console.log(error);

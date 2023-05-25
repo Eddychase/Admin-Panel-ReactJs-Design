@@ -4,7 +4,7 @@ import { useState } from "react";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Header from "../../components/Header";
 import axios from "axios";
-import { productInputs } from "../../formSource";
+import { userInputs } from "../../formSource";
 import { useNavigate } from "react-router-dom";
 
 const Form = () => {
@@ -24,10 +24,10 @@ const Form = () => {
     setFile("file");
     data.append("upload_preset", "upload");
     try {
-      const newProduct = {
+      const newUser = {
         ...info,
       };
-      await axios.post("http://localhost:8800/api/products", newProduct);
+      await axios.post("https://mobried-admin-panel.onrender.com/api/users", newUser);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -49,7 +49,7 @@ const Form = () => {
             "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },
           }}
         >
-          {productInputs.map((input) => (
+          {userInputs.map((input) => (
   <TextField
     key={input.id}
     fullWidth

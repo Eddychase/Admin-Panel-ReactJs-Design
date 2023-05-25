@@ -17,7 +17,7 @@ const TransactionForm = () => {
     useEffect(() => {
       const fetchProducts = async () => {
         try {
-          const response = await axios.get("http://localhost:8800/api/products");
+          const response = await axios.get("hhttps://mobried-admin-panel.onrender.com/api/products");
           setProductList(response.data);
         } catch (err) {
           console.log(err);
@@ -42,7 +42,7 @@ const TransactionForm = () => {
           productId: selectedProduct,
         };
         await axios.post(
-          "http://localhost:8800/api/transactions",
+          "https://mobried-admin-panel.onrender.com/api/transactions",
           newTransaction
         );
         navigate("/");
@@ -94,7 +94,7 @@ const TransactionForm = () => {
         </Box>
         <Box display="flex" justifyContent="end" mt="20px">
           <Button type="submit" color="secondary" variant="contained">
-            Create New User
+            Create New Transaction
           </Button>
         </Box>
       </form>

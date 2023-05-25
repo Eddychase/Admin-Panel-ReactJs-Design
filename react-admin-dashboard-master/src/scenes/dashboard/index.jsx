@@ -1,6 +1,5 @@
 import { Box, Button, IconButton, Typography, useTheme } from "@mui/material";
 import { tokens } from "../../theme";
-import { mockTransactions } from "../../data/mockData";
 import DownloadOutlinedIcon from "@mui/icons-material/DownloadOutlined";
 import InventoryIcon from '@mui/icons-material/Inventory';
 import PaidIcon from '@mui/icons-material/Paid';
@@ -9,11 +8,10 @@ import ReceiptIcon from '@mui/icons-material/Receipt';
 import Header from "../../components/Header";
 import LineChart from "../../components/LineChart";
 import GeographyChart from "../../components/GeographyChart";
-import BarChart from "../../components/BarChart";
 import StatBox from "../../components/StatBox";
-import ProgressCircle from "../../components/ProgressCircle";
 import React, { useState, useEffect } from "react";
 import axios from "axios";
+import PieChart from "../../components/PieChart";
 
 
 const Dashboard = () => {
@@ -21,47 +19,156 @@ const Dashboard = () => {
   const colors = tokens(theme.palette.mode);
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
+  const [totalPrice, setTotalPrice] = useState(0);
   const [totalTransactions, setTotalTransactions] = useState(0);
-  const [totalEarnings, setTotalEarnings] = useState(0);
-  const [latestTransactions, setLatestTransactions] = useState([]);
+  const [dailyTransactions, setDailyTransactions] = useState([]);
+  const [weeklyTotalPrice, setWeeklyTotalPrice] = useState(0);
+  const [monthlyTotalPrice, setMonthlyTotalPrice] = useState(0);
+  const [totalBuyingPrice, setTotalBuyingPrice] = useState(0);
+  const [dailyTotalPrice, setDailyTotalPrice] = useState([]);
+  const [profit, setProfit] = useState(0);
+  const [latestTransactions, setLatestTransactions] = useState([])
+  const [totalEarnings,setTotalEarnings]= useState(0)
   // ...
 
   useEffect(() => {
+    axios.get("https://mobried-admin-panel.onrender.com/api/transactions")
+      .then((response) => {
+        const transactions = response.data;
+        const numTransactions = transactions.length;
+        const total = transactions.reduce(
+          (acc, transaction) => acc + transaction.totalPrice,
+          0
+        );
+        setTotalTransactions(numTransactions);
+        setTotalPrice(total);
+  
+        // Filter transactions for today
+        const today = new Date();
+        const todayTransactions = transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.createdAt);
+          return (
+            transactionDate.getDate() === today.getDate() &&
+            transactionDate.getMonth() === today.getMonth() &&
+            transactionDate.getFullYear() === today.getFullYear()
+          );
+        });
+  
+        // Calculate total price for today's transactions
+        const todayTotalPrice = todayTransactions.reduce(
+          (acc, transaction) => acc + transaction.totalPrice,
+          0
+        );
+  
+        setDailyTransactions(todayTransactions);
+        setDailyTotalPrice(todayTotalPrice);
+  
+        // Filter transactions for this week
+        const firstDayOfWeek = new Date(
+          today.setDate(today.getDate() - today.getDay())
+        );
+        const lastDayOfWeek = new Date(
+          today.setDate(today.getDate() + (6 - today.getDay()))
+        ); // Calculate last day of the week
+        const weekTransactions = transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.createdAt);
+          return (
+            transactionDate >= firstDayOfWeek &&
+            transactionDate <= lastDayOfWeek
+          );
+        });
+  
+        // Calculate total price for this week's transactions
+        const weekTotalPrice = weekTransactions.reduce(
+          (acc, transaction) => acc + transaction.totalPrice,
+          0
+        );
+  
+        setWeeklyTotalPrice(weekTotalPrice);
+  
+        // Filter transactions for this month
+        const monthTransactions = transactions.filter((transaction) => {
+          const transactionDate = new Date(transaction.createdAt);
+          return (
+            transactionDate.getMonth() === today.getMonth() &&
+            transactionDate.getFullYear() === today.getFullYear()
+          );
+        });
+  
+        // Calculate total price for this month's transactions
+        const monthTotalPrice = monthTransactions.reduce(
+          (acc, transaction) => acc + transaction.totalPrice,
+          0
+        );
+  
+        setMonthlyTotalPrice(monthTotalPrice);
+  
+  
+        // Calculate total buying price and profit
+axios.get("https://mobried-admin-panel.onrender.com/api/products")
+.then((response) => {
+  const products = response.data;
+  const totalBuyingPrice = products.reduce(
+    (acc, product) => acc + product.buyingPrice * product.quantity,
+    0
+  );
+
+  // Calculate profit for each transaction
+  const profit = transactions.reduce((acc, transaction) => {
+    const product = products.find((p) => p.id === transaction.productId);
+    if (product) {
+      const transactionProfit = (transaction.sellingPrice - product.buyingPrice) * transaction.quantity;
+      return acc + transactionProfit;
+    }
+    return acc;
+  }, 0);
+
+  setTotalBuyingPrice(totalBuyingPrice);
+  setProfit(profit);
+})
+.catch((error) => console.log(error));
+
+      })
+      .catch((error) => console.log(error));
+  }, []);
+  
+  
+  useEffect(() => {
     axios
-      .get("http://localhost:8800/api/users")
+      .get("https://mobried-admin-panel.onrender.com/api/users")
       .then((response) => {
         const users = response.data;
         console.log(users);
         const numUsers = users.count.total;
         setTotalUsers(numUsers);
-        
       })
       .catch((error) => console.log(error));
-
+  
     axios
-      .get("http://localhost:8800/api/products")
+      .get("https://mobried-admin-panel.onrender.com/api/products")
       .then((response) => {
         const products = response.data;
         const numProducts = products.length;
         setTotalProducts(numProducts);
       })
       .catch((error) => console.log(error));
-
-      axios
-      .get("http://localhost:8800/api/transactions")
+  
+    axios
+      .get("https://mobried-admin-panel.onrender.com/api/transactions")
       .then((response) => {
         const transactions = response.data;
-        const numTransactions = transactions.length;
-        setTotalTransactions(numTransactions);
-        const total = transactions.reduce(
-          (acc, transaction) => acc + transaction.totalPrice,
-          0
-        );
-        setTotalEarnings(total);
-        const latest = transactions.slice(-5); // Get the latest 5 transactions
-        setLatestTransactions(latest);
-      })
-      .catch((error) => console.log(error));
+        const numTransactions = transactions.length
+  ;
+  setTotalTransactions(numTransactions);
+  const total = transactions.reduce(
+  (acc, transaction) => acc + transaction.totalPrice,
+  0
+  );
+  setTotalEarnings(total);
+  const latest = transactions.slice(-5); // Get the latest 5 transactions
+  setLatestTransactions(latest);
+  })
+  .catch((error) => console.log(error));
   }, []);
   
 
@@ -161,7 +268,7 @@ const Dashboard = () => {
         >
           <StatBox
             title={totalEarnings}
-            subtitle="Total Earnings"
+            subtitle="Total Earnings (kshs)"
             progress="0.80"
             
             icon={
@@ -198,7 +305,7 @@ const Dashboard = () => {
                 fontWeight="bold"
                 color={colors.greenAccent[500]}
               >
-                $59,342.32
+                {totalEarnings}
               </Typography>
             </Box>
             <Box>
@@ -258,7 +365,7 @@ const Dashboard = () => {
                 p="5px 10px"
                 borderRadius="4px"
               >
-                ${transaction.totalPrice}
+                Kshs {transaction.totalPrice}
               </Box>
             </Box>
           ))}
@@ -269,56 +376,188 @@ const Dashboard = () => {
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          p="30px"
+          p="20px"
         >
-          <Typography variant="h5" fontWeight="600">
-            Campaign
+          <Typography variant="h5" fontWeight="900">
+            STATISTICS
           </Typography>
           <Box
-            display="flex"
+          display="flex"
+          justifyContent="center"
+          alignItems="center"
+          
             flexDirection="column"
-            alignItems="center"
             mt="25px"
           >
-            <ProgressCircle size="125" />
+     <Box display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          
+            flexDirection="row">
+            <Typography
+              variant="h6"
+              color={colors.greenAccent[500]}
+              
+              p="10px"
+              mt="5px"
+              sx={{ mr: "37px"  }}
+            >
+             Daily Revenue      
+            </Typography>
+            <Typography
+              variant="h6"
+              
+              p="10px"
+              sx={{ mt: "5px" }}
+            > 
+               Kshs {dailyTotalPrice}
+            </Typography>
+            </Box>
+
+            <Box display="flex"
+          justifyContent="space-between"
+          alignItems="center"
+          
+            flexDirection="row"
+            >
             <Typography
               variant="h5"
               color={colors.greenAccent[500]}
-              sx={{ mt: "15px" }}
+              
+              p="10px"
+              mt="5px"
+              sx={{ mr: "15px"  }}
             >
-              $48,352 revenue generated
+             Weekly Revenue  
             </Typography>
-            <Typography>Includes extra misc expenditures and costs</Typography>
+            <Typography
+              variant="h6"
+              
+              p="10px"
+              sx={{ mt: "5px" }}
+            > 
+              Kshs {weeklyTotalPrice}
+            </Typography>
+            </Box>
+
+            <Box display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              
+                flexDirection="row"
+             >
+            <Typography
+              variant="h6"
+              color={colors.greenAccent[500]}
+             
+              p="10px"
+              mt="5px"
+              sx={{ mr: "22px"  }}
+            >
+             Monthly Revenue  
+            </Typography>
+            <Typography
+              variant="h6"
+              
+              p="10px"
+              sx={{ mt: "5px" }}
+            > 
+              Kshs {monthlyTotalPrice}
+            </Typography>
+            </Box>
+            
+            <Box 
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              flexDirection="row"
+            >
+            <Typography
+              variant="h6"
+              color={colors.greenAccent[500]}
+              p="10px"
+              mt="5px"
+              sx={{ mr: "8px"  }}
+              
+            >
+             Products / Expenses
+            </Typography>
+            <Typography
+              variant="h6"
+              
+              p="10px"
+              sx={{ mt: "5px" }}
+            > 
+               Kshs {totalBuyingPrice}
+            </Typography>
+            </Box>
+
+            <Box 
+              display="flex"
+              justifyContent="space-between"
+              alignItems="center"
+              flexDirection="row"
+            >
+            <Typography
+              variant="h6"
+              color={colors.greenAccent[500]}
+              p="10px"
+              mt="5px"
+              sx={{ mr: "15px"  }}
+              
+            >
+             Margin Gross Profit   
+            </Typography>
+            <Typography
+              variant="h6"
+              
+              p="10px"
+              sx={{ mt: "5px" }}
+            > 
+               Kshs {profit}
+            </Typography>
+            </Box>
+
+            
+
           </Box>
         </Box>
         <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
+         
         >
           <Typography
             variant="h5"
             fontWeight="600"
-            sx={{ padding: "30px 30px 0 30px" }}
+            sx={{ padding: "20px 20px 0 20px" }}
           >
-            Sales Quantity
+            TOP PRODUCTS
           </Typography>
-          <Box height="250px" mt="-20px">
-            <BarChart isDashboard={true} />
+          <Box height="280px" 
+               
+                display="flex"
+          justifyContent="center"
+          alignItems="center"
+          
+            flexDirection="column"
+          >
+            <PieChart isDashboard={true} />
           </Box>
         </Box>
         <Box
           gridColumn="span 4"
           gridRow="span 2"
           backgroundColor={colors.primary[400]}
-          padding="30px"
+          padding="20px"
         >
           <Typography
             variant="h5"
             fontWeight="600"
             sx={{ marginBottom: "15px" }}
           >
-            Geography Based Traffic
+            GEOGRAPHY BASED TRAFFIC
           </Typography>
           <Box height="200px">
             <GeographyChart isDashboard={true} />

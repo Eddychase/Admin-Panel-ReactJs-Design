@@ -1,10 +1,24 @@
+import React, { useEffect, useState } from "react";
 import { Box, useTheme } from "@mui/material";
 import { tokens } from "../theme";
 
-const ProgressCircle = ({ progress = "0.75", size = "40" }) => {
+const ProgressCircle = ({ progress = 0, size = 40 }) => {
   const theme = useTheme();
   const colors = tokens(theme.palette.mode);
-  const angle = progress * 360;
+  const [currentProgress, setCurrentProgress] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentProgress((prevProgress) => prevProgress + 1);
+    }, 10);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
+
+  const angle = (currentProgress / 100) * 360;
+
   return (
     <Box
       sx={{

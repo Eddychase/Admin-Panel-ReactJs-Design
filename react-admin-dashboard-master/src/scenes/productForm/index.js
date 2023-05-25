@@ -27,7 +27,7 @@ const ProductForm = () => {
       const newProduct = {
         ...info,
       };
-      await axios.post("http://localhost:8800/api/products", newProduct);
+      await axios.post("https://mobried-admin-panel.onrender.com/api/products", newProduct);
       navigate("/");
     } catch (err) {
       console.log(err);
@@ -65,7 +65,7 @@ const ProductForm = () => {
         </Box>
         <Box display="flex" justifyContent="end" mt="20px">
           <Button type="submit" color="secondary" variant="contained">
-            Create New User
+            Create New Product
           </Button>
         </Box>
       </form>

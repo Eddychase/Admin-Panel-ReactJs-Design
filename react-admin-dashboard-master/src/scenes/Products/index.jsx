@@ -1,9 +1,10 @@
-import { Box, Typography, useTheme } from "@mui/material";
+import { Box, Typography, useTheme, Button } from "@mui/material";
 import { DataGrid,GridToolbar } from "@mui/x-data-grid";
 import { tokens } from "../../theme";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import Header from "../../components/Header";
+
 
 const Products = () => {
   const theme = useTheme();
@@ -28,6 +29,11 @@ const Products = () => {
       field: "buyingPrice",
       headerName: "Price Bought",
       flex: 1,
+      renderCell: (params) => (
+        <Typography color={colors.greenAccent[300]}>
+          Kshs {params.row.buyingPrice} {/* Updated field name to match the transaction data */}
+        </Typography>
+      ),
     },
     {
       field: "quantity",
@@ -39,29 +45,55 @@ const Products = () => {
       headerName: "min Selling Price",
       flex: 1,
       renderCell: (params) => (
-        <Typography color={colors.greenAccent[500]}>
-          ${params.row.minSellingPrice} {/* Updated field name to match the transaction data */}
+        <Typography color={colors.greenAccent[300]}>
+          Kshs {params.row.minSellingPrice} {/* Updated field name to match the transaction data */}
         </Typography>
       ),
     },
+    {
+      field: "delete",
+      headerName: "",
+      flex: 1,
+      renderCell: (params) => (
+        <Button
+        variant="contained"
+        color="error"
+        size="small"
+        onClick={() => handleDelete(params.row.id)}
+      >
+        Delete
+      </Button>
+      ),
+    },
+  
+    
     
   ];
 
   useEffect(() => {
-    const fetchTransactions = async () => {
+    const fetchProducts = async () => {
       try {
-        const response = await axios.get("http://localhost:8800/api/products");
-        const formattedProducts = response.data.map((product, index) => ({
-          id: index + 1,
+        const response = await axios.get("https://mobried-admin-panel.onrender.com/api/products");
+        const formattedProducts = response.data.map((product) => ({
           ...product,
+          id: product._id, // Assign the product's _id to the id field
         }));
         setProducts(formattedProducts);
       } catch (error) {
         console.log(error);
       }
     };
-    fetchTransactions();
+    fetchProducts();
   }, []);
+
+  const handleDelete = async (id) => {
+    try {
+      await axios.delete(`https://mobried-admin-panel.onrender.com/api/products/${id}`);
+      setProducts(products.filter((product) => product.id !== id));
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return (
     <Box m="20px">
