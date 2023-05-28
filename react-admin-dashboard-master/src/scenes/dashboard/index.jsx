@@ -42,6 +42,7 @@ const Dashboard = () => {
         );
         setTotalTransactions(numTransactions);
         setTotalPrice(total);
+        console.log(totalPrice)
   
         // Filter transactions for today
         const today = new Date();
@@ -61,6 +62,7 @@ const Dashboard = () => {
         );
   
         setDailyTransactions(todayTransactions);
+        console.log(dailyTransactions)
         setDailyTotalPrice(todayTotalPrice);
   
         // Filter transactions for this week
@@ -367,6 +369,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
               >
                 Kshs {transaction.totalPrice}
               </Box>
+              
             </Box>
           ))}
         </Box>
