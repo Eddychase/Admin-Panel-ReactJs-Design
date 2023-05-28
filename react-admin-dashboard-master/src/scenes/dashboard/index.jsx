@@ -19,9 +19,7 @@ const Dashboard = () => {
   const colors = tokens(theme.palette.mode);
   const [totalUsers, setTotalUsers] = useState(0);
   const [totalProducts, setTotalProducts] = useState(0);
-  const [totalPrice, setTotalPrice] = useState(0);
   const [totalTransactions, setTotalTransactions] = useState(0);
-  const [dailyTransactions, setDailyTransactions] = useState([]);
   const [weeklyTotalPrice, setWeeklyTotalPrice] = useState(0);
   const [monthlyTotalPrice, setMonthlyTotalPrice] = useState(0);
   const [totalBuyingPrice, setTotalBuyingPrice] = useState(0);
@@ -41,8 +39,6 @@ const Dashboard = () => {
           0
         );
         setTotalTransactions(numTransactions);
-        setTotalPrice(total);
-        console.log(totalPrice)
   
         // Filter transactions for today
         const today = new Date();
@@ -61,8 +57,7 @@ const Dashboard = () => {
           0
         );
   
-        setDailyTransactions(todayTransactions);
-        console.log(dailyTransactions)
+        
         setDailyTotalPrice(todayTotalPrice);
   
         // Filter transactions for this week
