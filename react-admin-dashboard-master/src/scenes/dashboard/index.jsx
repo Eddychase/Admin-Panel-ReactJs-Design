@@ -39,6 +39,7 @@ const Dashboard = () => {
           0
         );
         setTotalTransactions(numTransactions);
+        console.log(total)
   
         // Filter transactions for today
         const today = new Date();
