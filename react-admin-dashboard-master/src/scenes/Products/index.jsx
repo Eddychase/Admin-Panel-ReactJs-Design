@@ -30,7 +30,7 @@ const Products = () => {
       headerName: "Price Bought",
       flex: 1,
       renderCell: (params) => (
-        <Typography color={colors.greenAccent[300]}>
+        <Typography color="#fff">
           Kshs {params.row.buyingPrice} {/* Updated field name to match the transaction data */}
         </Typography>
       ),
@@ -45,7 +45,7 @@ const Products = () => {
       headerName: "min Selling Price",
       flex: 1,
       renderCell: (params) => (
-        <Typography color={colors.greenAccent[300]}>
+        <Typography color="#fff">
           Kshs {params.row.minSellingPrice} {/* Updated field name to match the transaction data */}
         </Typography>
       ),
@@ -109,18 +109,19 @@ const Products = () => {
             borderBottom: "none",
           },
           "& .name-column--cell": {
-            color: colors.greenAccent[300],
+            color: "#fff",
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: "#000000",
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
+            backgroundColor: "#093637",
+            
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: "#0f2027",
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,

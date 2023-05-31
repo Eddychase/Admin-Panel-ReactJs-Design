@@ -38,7 +38,7 @@ const ProductForm = () => {
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="CREATE PRODUCT" subtitle="Create a New Product" />
 
       <form onSubmit={handleClick}>
         <Box

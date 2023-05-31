@@ -60,17 +60,17 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         axis: {
           domain: {
             line: {
-              stroke: colors.grey[100],
+              stroke: "#24fe41",
             },
           },
           legend: {
             text: {
-              fill: colors.grey[100],
+              fill: "#24fe41",
             },
           },
           ticks: {
             line: {
-              stroke: colors.grey[100],
+              stroke: "#24fe41",
               strokeWidth: 1,
             },
             text: {
@@ -85,7 +85,7 @@ const LineChart = ({ isCustomLineColors = false, isDashboard = false }) => {
         },
         tooltip: {
           container: {
-            background: colors.primary[500], // Changed from 'color' to 'background'
+            background: "#24fe41", // Changed from 'color' to 'background'
           },
         },
       }}

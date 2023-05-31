@@ -179,7 +179,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
         <Box>
           <Button
             sx={{
-              backgroundColor: colors.blueAccent[700],
+              backgroundColor:"#000000",
               color: colors.grey[100],
               fontSize: "14px",
               fontWeight: "bold",
@@ -201,11 +201,13 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
       >
         {/* ROW 1 */}
         <Box
+        sx={{ borderRadius: '5px', boxShadow: 4 }}
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
           display="flex"
           alignItems="center"
           justifyContent="center"
+          box-shadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
         >
           <StatBox
               title={totalUsers}
@@ -214,17 +216,19 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
               
               icon={
                 <PersonAddIcon
-                  sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                  sx={{ color: "#52c234", fontSize: "26px" }}
               />
             }
           />
         </Box>
         <Box
+        sx={{ borderRadius: '5px', boxShadow: 4 }}
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
           display="flex"
           alignItems="center"
           justifyContent="center"
+          box-shadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
         >
           <StatBox
             title={totalProducts}
@@ -233,17 +237,19 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
             
             icon={
               <InventoryIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: "#52c234", fontSize: "26px" }}
               />
             }
           />
         </Box>
         <Box
+        sx={{ borderRadius: '5px', boxShadow: 4 }}
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
           display="flex"
           alignItems="center"
           justifyContent="center"
+          box-shadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
         >
           <StatBox
             title={totalTransactions}
@@ -252,17 +258,19 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
             
             icon={
               <ReceiptIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: "#52c234", fontSize: "26px" }}
               />
             }
           />
         </Box>
         <Box
+        sx={{ borderRadius: '5px', boxShadow: 4 }}
           gridColumn="span 3"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
           display="flex"
           alignItems="center"
           justifyContent="center"
+          box-shadow="rgba(0, 0, 0, 0.35) 0px 5px 15px"
         >
           <StatBox
             title={totalEarnings}
@@ -271,7 +279,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
             
             icon={
               <PaidIcon
-                sx={{ color: colors.greenAccent[600], fontSize: "26px" }}
+                sx={{ color: "#52c234", fontSize: "26px" }}
               />
             }
           />
@@ -281,7 +289,8 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
         <Box
           gridColumn="span 8"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
+          sx={{ borderRadius: '5px', boxShadow: 4 }}
         >
           <Box
             mt="25px"
@@ -294,14 +303,14 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
               <Typography
                 variant="h5"
                 fontWeight="600"
-                color={colors.grey[100]}
+                color="#fff"
               >
                 Revenue Generated
               </Typography>
               <Typography
                 variant="h3"
                 fontWeight="bold"
-                color={colors.greenAccent[500]}
+                color="#52c234"
               >
                 {totalEarnings}
               </Typography>
@@ -309,7 +318,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
             <Box>
               <IconButton>
                 <DownloadOutlinedIcon
-                  sx={{ fontSize: "26px", color: colors.greenAccent[500] }}
+                  sx={{ fontSize: "26px", color: "#52c234" }}
                 />
               </IconButton>
             </Box>
@@ -321,18 +330,20 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
           overflow="auto"
+          sx={{ borderRadius: '5px', boxShadow: 4 }}
         >
           <Box
             display="flex"
             justifyContent="space-between"
             alignItems="center"
             borderBottom={`4px solid ${colors.primary[500]}`}
+            backgroundColor="#000000"
             colors={colors.grey[100]}
             p="15px"
           >
-            <Typography color={colors.grey[100]} variant="h5" fontWeight="600">
+            <Typography color="#fff" variant="h5" fontWeight="600">
               Recent Transactions
             </Typography>
           </Box>
@@ -347,7 +358,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
             >
               <Box>
                 <Typography
-                  color={colors.greenAccent[500]}
+                  color="#fff"
                   variant="h5"
                   fontWeight="600"
                 >
@@ -359,7 +370,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
               </Box>
               <Box color={colors.grey[100]}>{transaction.quantity}</Box>
               <Box
-                backgroundColor={colors.greenAccent[500]}
+                color="#fff"
                 p="5px 10px"
                 borderRadius="4px"
               >
@@ -372,39 +383,40 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
 
         {/* ROW 3 */}
         <Box
+        sx={{ borderRadius: '5px', boxShadow: 4 }}
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
           p="20px"
         >
-          <Typography variant="h5" fontWeight="900">
+          <Typography 
+            variant="h5" 
+            fontWeight="900"
+          >
             STATISTICS
           </Typography>
           <Box
-          display="flex"
-          justifyContent="center"
-          alignItems="center"
-          
+            display="flex"
+            justifyContent="center"
+            alignItems="center"
             flexDirection="column"
-            mt="25px"
+            mt="5px"
           >
-     <Box display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          
+        <Box
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
             flexDirection="row">
             <Typography
-              variant="h6"
-              color={colors.greenAccent[500]}
-              
+              variant="h5"
+              color="#52c234" 
               p="10px"
-              mt="5px"
-              sx={{ mr: "37px"  }}
+              mt="5px"  
             >
              Daily Revenue      
             </Typography>
             <Typography
-              variant="h6"
+              variant="h5"
               
               p="10px"
               sx={{ mt: "5px" }}
@@ -413,25 +425,22 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
             </Typography>
             </Box>
 
-            <Box display="flex"
-          justifyContent="space-between"
-          alignItems="center"
-          
+            <Box 
+            display="flex"
+            justifyContent="space-between"
+            alignItems="center"
             flexDirection="row"
             >
             <Typography
               variant="h5"
-              color={colors.greenAccent[500]}
-              
+              color="#52c234"
               p="10px"
               mt="5px"
-              sx={{ mr: "15px"  }}
             >
-             Weekly Revenue  
+             Week Revenue  
             </Typography>
             <Typography
-              variant="h6"
-              
+              variant="h5"
               p="10px"
               sx={{ mt: "5px" }}
             > 
@@ -446,18 +455,15 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
                 flexDirection="row"
              >
             <Typography
-              variant="h6"
-              color={colors.greenAccent[500]}
-             
+              variant="h5"
+              color="#52c234"
               p="10px"
-              mt="5px"
-              sx={{ mr: "22px"  }}
+              mt="5px"  
             >
-             Monthly Revenue  
+             Month Revenue  
             </Typography>
             <Typography
               variant="h6"
-              
               p="10px"
               sx={{ mt: "5px" }}
             > 
@@ -472,18 +478,15 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
               flexDirection="row"
             >
             <Typography
-              variant="h6"
-              color={colors.greenAccent[500]}
+              variant="h5"
+              color="#52c234"
               p="10px"
               mt="5px"
-              sx={{ mr: "8px"  }}
-              
             >
-             Products / Expenses
+             Products Cost
             </Typography>
             <Typography
               variant="h6"
-              
               p="10px"
               sx={{ mt: "5px" }}
             > 
@@ -498,18 +501,15 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
               flexDirection="row"
             >
             <Typography
-              variant="h6"
-              color={colors.greenAccent[500]}
+              variant="h5"
+              color="#52c234"
               p="10px"
               mt="5px"
-              sx={{ mr: "15px"  }}
-              
             >
-             Margin Gross Profit   
+              Gross Profit   
             </Typography>
             <Typography
               variant="h6"
-              
               p="10px"
               sx={{ mt: "5px" }}
             > 
@@ -524,7 +524,8 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
+          sx={{ borderRadius: '5px', boxShadow: 4 }}
          
         >
           <Typography
@@ -539,6 +540,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
                 display="flex"
           justifyContent="center"
           alignItems="center"
+          backgroundColor="#000000"
           
             flexDirection="column"
           >
@@ -548,8 +550,9 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
         <Box
           gridColumn="span 4"
           gridRow="span 2"
-          backgroundColor={colors.primary[400]}
+          backgroundColor="#000000"
           padding="20px"
+          sx={{ borderRadius: '5px', boxShadow: 4 }}
         >
           <Typography
             variant="h5"
@@ -558,7 +561,7 @@ axios.get("https://mobried-admin-panel.onrender.com/api/products")
           >
             GEOGRAPHY BASED TRAFFIC
           </Typography>
-          <Box height="200px">
+          <Box  backgroundColor="#000000" height="200px">
             <GeographyChart isDashboard={true} />
           </Box>
         </Box>

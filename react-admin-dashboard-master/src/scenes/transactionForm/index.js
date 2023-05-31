@@ -17,7 +17,7 @@ const TransactionForm = () => {
     useEffect(() => {
       const fetchProducts = async () => {
         try {
-          const response = await axios.get("hhttps://mobried-admin-panel.onrender.com/api/products");
+          const response = await axios.get("https://mobried-admin-panel.onrender.com/api/products");
           setProductList(response.data);
         } catch (err) {
           console.log(err);
@@ -54,10 +54,10 @@ const TransactionForm = () => {
 
   return (
     <Box m="20px">
-      <Header title="CREATE USER" subtitle="Create a New User Profile" />
+      <Header title="CREATE USER" subtitle="Create a New Transaction" />
       <FormControl>
   <InputLabel>Select a Product</InputLabel>
-  <Select value={selectedProduct} onChange={handleProductChange}>
+  <Select style={{ width: '300px', border: '1px solid white', color:"#093637" }} value={selectedProduct} onChange={handleProductChange}>
     <MenuItem value="">
       <em>-- Select a product --</em>
     </MenuItem>
@@ -73,6 +73,7 @@ const TransactionForm = () => {
         <Box
           display="grid"
           gap="30px"
+          marginTop="20px"
           gridTemplateColumns="repeat(4, minmax(0, 1fr))"
           sx={{
             "& > div": { gridColumn: isNonMobile ? undefined : "span 4" },

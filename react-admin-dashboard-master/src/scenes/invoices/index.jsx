@@ -32,8 +32,8 @@ const Invoices = () => {
       headerName: "Price",
       flex: 1,
       renderCell: (params) => (
-        <Typography color={colors.greenAccent[500]}>
-          ${params.row.sellingPrice} {/* Updated field name to match the transaction data */}
+        <Typography color="#fff">
+          Kshs {params.row.sellingPrice} {/* Updated field name to match the transaction data */}
         </Typography>
       ),
     },
@@ -42,8 +42,8 @@ const Invoices = () => {
       headerName: "Total",
       flex: 1,
       renderCell: (params) => (
-        <Typography color={colors.greenAccent[500]}>
-          ${params.row.quantity * params.row.sellingPrice} {/* Updated field name to match the transaction data */}
+        <Typography color="#fff">
+          Kshs {params.row.quantity * params.row.sellingPrice} {/* Updated field name to match the transaction data */}
         </Typography>
       ),
     },
@@ -104,18 +104,18 @@ const Invoices = () => {
             borderBottom: "none",
           },
           "& .name-column--cell": {
-            color: colors.greenAccent[300],
+            color: "fff",
           },
           "& .MuiDataGrid-columnHeaders": {
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: "#000000",
             borderBottom: "none",
           },
           "& .MuiDataGrid-virtualScroller": {
-            backgroundColor: colors.primary[400],
+            backgroundColor: "#093637",
           },
           "& .MuiDataGrid-footerContainer": {
             borderTop: "none",
-            backgroundColor: colors.blueAccent[700],
+            backgroundColor: "#0f2027",
           },
           "& .MuiCheckbox-root": {
             color: `${colors.greenAccent[200]} !important`,

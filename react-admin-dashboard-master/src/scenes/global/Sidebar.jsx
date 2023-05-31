@@ -18,13 +18,11 @@ import MenuOutlinedIcon from "@mui/icons-material/MenuOutlined";
 import MapOutlinedIcon from "@mui/icons-material/MapOutlined";
 
 const Item = ({ title, to, icon, selected, setSelected }) => {
-  const theme = useTheme();
-  const colors = tokens(theme.palette.mode);
   return (
     <MenuItem
       active={selected === title}
       style={{
-        color: colors.grey[100],
+        color: "#fff",
       }}
       onClick={() => setSelected(title)}
       icon={icon}
@@ -43,9 +41,10 @@ const Sidebar = () => {
 
   return (
     <Box
+    
       sx={{
         "& .pro-sidebar-inner": {
-          background: `${colors.primary[400]} !important`,
+          background:"#093637",
         },
         "& .pro-icon-wrapper": {
           backgroundColor: "transparent !important",
@@ -54,10 +53,10 @@ const Sidebar = () => {
           padding: "5px 35px 5px 20px !important",
         },
         "& .pro-inner-item:hover": {
-          color: "#868dfb !important",
+          color: "#6dd5ed !important",
         },
         "& .pro-menu-item.active": {
-          color: "#6870fa !important",
+          color: "#24fe41 !important",
         },
       }}
     >
@@ -79,8 +78,8 @@ const Sidebar = () => {
                 alignItems="center"
                 ml="15px"
               >
-                <Typography variant="h3" color={colors.grey[100]}>
-                  ADMINIS
+                <Typography variant="h3" color="#fff">
+                  ADMIN
                 </Typography>
                 <IconButton onClick={() => setIsCollapsed(!isCollapsed)}>
                   <MenuOutlinedIcon />
@@ -101,7 +100,7 @@ const Sidebar = () => {
                 >
                   MOBRIED
                 </Typography>
-                <Typography variant="h5" color={colors.greenAccent[500]}>
+                <Typography variant="h5" color="#fff">
                   Business Admin
                 </Typography>
               </Box>
@@ -119,7 +118,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color="#fff"
               sx={{ m: "15px 0 5px 20px" }}
             >
               Data
@@ -148,7 +147,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color="#fff"
               sx={{ m: "15px 0 5px 20px" }}
             >
               Pages
@@ -191,7 +190,7 @@ const Sidebar = () => {
 
             <Typography
               variant="h6"
-              color={colors.grey[300]}
+              color="#fff"
               sx={{ m: "15px 0 5px 20px" }}
             >
               Charts
