@@ -6,14 +6,15 @@ Welcome to the Admin Panel ReactJS Design repository! This repository contains a
 
 - Responsive design: The admin panel is designed to work seamlessly across different screen sizes, including desktop, tablet, and mobile devices.
 - Modern UI: The user interface is built using modern design principles, featuring a clean and intuitive layout, clear typography, and well-organized components.
+- Functionality: The admin panel supports creating users, products and transactions are created with the products available. 
+- Data: Data such as expenditure on products, total products and total products expense, profit and total transactions per day, week and month are available both on charts and widgets.
 - Customizable: You can easily customize the design to fit your specific requirements. The code is modular and well-structured, making it easy to modify or extend the functionality.
 - ReactJS components: The admin panel is built using ReactJS, a popular JavaScript library for building user interfaces. ReactJS provides a component-based architecture that promotes reusability and maintainability.
 - UI widgets: The design includes various UI widgets commonly used in admin panels, such as tables, forms, charts, and notifications. These widgets are implemented using popular ReactJS libraries like React-Bootstrap and Material-UI.
 - Routing and navigation: The admin panel includes a routing mechanism that allows you to navigate between different pages or sections of the application. The navigation menu is dynamically generated based on the defined routes.
 - Authentication and authorization: The design includes a basic authentication and authorization mechanism. You can easily integrate it with your backend API or extend it to meet your specific authentication requirements.
 - Theming support: The admin panel supports theming, allowing you to easily switch between different color schemes or create your own custom themes.
-- Functionality: The admin panel supports creating users, products and transactions are created with the products available. 
-- Data: Data such as expenditure on products, total products and total products expense, profit and total transactions per day, week and month are available both on charts and widgets.
+
 
 ## Getting Started
 
