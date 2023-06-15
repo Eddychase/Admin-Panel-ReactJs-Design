@@ -12,6 +12,8 @@ Welcome to the Admin Panel ReactJS Design repository! This repository contains a
 - Routing and navigation: The admin panel includes a routing mechanism that allows you to navigate between different pages or sections of the application. The navigation menu is dynamically generated based on the defined routes.
 - Authentication and authorization: The design includes a basic authentication and authorization mechanism. You can easily integrate it with your backend API or extend it to meet your specific authentication requirements.
 - Theming support: The admin panel supports theming, allowing you to easily switch between different color schemes or create your own custom themes.
+- Functionality: The admin panel supports creating users, products and transactions are created with the products available. 
+- Data: Data such as expenditure on products, total products and total products expense, profit and total transactions per day, week and month are available both on charts and widgets.
 
 ## Getting Started
 
