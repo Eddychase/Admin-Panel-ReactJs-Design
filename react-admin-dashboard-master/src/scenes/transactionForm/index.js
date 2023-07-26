@@ -8,49 +8,45 @@ import { transactionInputs } from "../../formSource";
 import { useNavigate } from "react-router-dom";
 
 const TransactionForm = () => {
-    const [productList, setProductList] = useState([]);
-    const [selectedProduct, setSelectedProduct] = useState("");
-    const [transactionData, setTransactionData] = useState({});
-    const navigate = useNavigate();
-    const isNonMobile = useMediaQuery("(min-width:600px)");
-  
-    useEffect(() => {
-      const fetchProducts = async () => {
-        try {
-          const response = await axios.get("https://mobried-admin-panel.onrender.com/api/products");
-          setProductList(response.data);
-        } catch (err) {
-          console.log(err);
-        }
-      };
-      fetchProducts();
-    }, []);
-  
-    const handleProductChange = (e) => {
-      setSelectedProduct(e.target.value);
-    };
-  
-    const handleTransactionDataChange = (e) => {
-      setTransactionData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
-    };
-  
-    const handleSubmit = async (e) => {
-      e.preventDefault();
+  const [productList, setProductList] = useState([]);
+  const [selectedProduct, setSelectedProduct] = useState("");
+  const [transactionData, setTransactionData] = useState({});
+  const navigate = useNavigate();
+  const isNonMobile = useMediaQuery("(min-width:600px)");
+
+  useEffect(() => {
+    const fetchProducts = async () => {
       try {
-        const newTransaction = {
-          ...transactionData,
-          productId: selectedProduct,
-        };
-        await axios.post(
-          "https://mobried-admin-panel.onrender.com/api/transactions",
-          newTransaction
-        );
-        navigate("/");
+        const response = await axios.get("https://mobried-admin-panel.onrender.com/api/products");
+        setProductList(response.data);
       } catch (err) {
         console.log(err);
       }
     };
-  
+    fetchProducts();
+  }, []);
+
+  const handleProductChange = (e) => {
+    setSelectedProduct(e.target.value);
+  };
+
+  const handleTransactionDataChange = (e) => {
+    setTransactionData((prev) => ({ ...prev, [e.target.name]: e.target.value }));
+  };
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      const newTransaction = {
+        ...transactionData,
+        productId: selectedProduct,
+      };
+      await axios.post("https://mobried-admin-panel.onrender.com/api/transactions", newTransaction);
+      navigate("/");
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   return (
     <Box m="20px">
